@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Student Management System</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+    crossorigin="anonymous"></link>
+<!-- Add fontawesome icons link -->  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" 
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+<!-- Latest compiled JavaScript -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-MK5oLcrqf9R+uC+StJ/ie2oZuG/6zB/X6HYu8M/Ia0PKMIyL8ZfFWpi1Ka4a6ZdF" crossorigin="anonymous"></script>
+    
+<style>
+  body {
+    color: #343a40; /* Dark gray text */
+    padding-top: 20px;
+    /* Set the background image and properties */
+    background-image: url('https://source.unsplash.com/1920x1080/?nature,water');
+    background-size: cover;
+    background-position: center;
+    animation: slide 20s linear infinite; /* Apply animation */
+  }
+  
+  .navbar {
+    padding: 20px 0;
+    margin-top: 0;
+    border: 2px solid white;
+    border-left: 0;
+    border-left: 0;
+    border-top: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add this line for box shadow */
+  }
+
+  /* Animation for the background image */
+  @keyframes slide {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ********************************Create Navigation bar************************************* -->
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#"><i class="fa-solid fa-user-group" style="color:blue">&nbsp</i>Student Management System</a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+ <!-- Navbar links -->
+<div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/students}">
+                <i class="fa-regular fa-circle-user" style="color:blue"></i> Student Management
+            </a>
+        </li>
+    </ul>
+     <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#" th:href="@{/home}">
+                <i class="fas fa-sign-out-alt" style="color: #FFD43B;"></i> Home
+            </a>
+        </li>
+    </ul>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#" th:href="@{/logout}">
+                <i class="fas fa-sign-out-alt" style="color: #FFD43B;"></i> Logout
+            </a>
+        </li>
+    </ul>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#" th:href="@{about-us}">
+                <i class="fas fa-address-card fa-flip-horizontal" style="color: #ff773d;"></i> About Us
+            </a>
+        </li>
+    </ul>
+</div>
+ 
+</nav>
+<!-- _______________________Body_____________________________ -->
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-4">
+      <a href="#" th:href="@{/students}" class="btn btn-primary btn-block mb-3">
+        <i class="fa-regular fa-circle-user" style="color:white"></i> See Student Details
+      </a>
+    </div>
+    <div class="col-md-4">
+      <a href="#" th:href = "@{/students/new}" class="btn btn-success btn-block mb-3">
+        <i class="fa-regular fa-user-plus" style="color:white"></i> Add Student
+      </a>
+    </div>
+    <div class="col-md-4">
+      <a href="#" th:href="@{/about-us}" class="btn btn-warning btn-block mb-3">
+        <i class="fas fa-address-card fa-flip-horizontal" style="color:white"></i> About Us
+      </a>
+    </div>
+  </div>
+</div>
+
+<div>
+	<h1 class="text-center mt-5">Welcome, <span th:text="${fname}"></span><span th:text="${lname}"></span>!</h1>
+	
+</div>
+</body>
+</html>

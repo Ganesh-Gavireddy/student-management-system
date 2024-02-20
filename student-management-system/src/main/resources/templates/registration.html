@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Registration</title>
+    <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-Jo63A3fd4RWpfeVNyMN9+E9A68O5+q6fRF1ntPfai9oXNHHQ0fVhHlVzMFh0gz+ROcKu19uOsrxrRftxznUU5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body {
+            background-color: #f2f2f2; /* Default background color for body */
+        }
+
+        /* Add a media query for smaller screens */
+        @media (max-width: 768px) {
+            body {
+                background-color: #ffffff; /* Change background color for smaller screens */
+            }
+        }
+
+        .form-container {
+            background-color: #ffffff; /* Default background color for form */
+            padding: 20px;
+            margin-top: 50px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Add a shadow for better visibility */
+        }
+
+        /* Add a media query for smaller screens */
+        @media (max-width: 768px) {
+            .form-container {
+                background-color: #f2f2f2; /* Change background color for smaller screens */
+            }
+        }
+
+        .required-label::after {
+            content: '*';
+            color: red;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- create navigation bar ( header) -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span> <span
+                        class="icon-bar"></span> <span class="icon-bar"></span> <span
+                        class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" th:href="@{/login}">Registration and
+                    Login Module</a>
+            </div>
+        </div>
+    </nav>
+
+    <br>
+    <br>
+    <!-- Create HTML registration form -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 form-container"> <!-- Add form-container class -->
+                <!-- success message -->
+
+                  <h1>Registration</h1> 
+                
+                <div th:if="${param.success}">
+                    <div class="alert alert-info">You've successfully registered
+                        to our awesome app!</div>
+                </div>
+                
+                <!-- error message -->
+					<div th:if="${param.error}">
+						<div class="alert alert-danger">This username already exists in the database..!</div>
+					</div>
+
+              
+                <form th:action="@{/registration}" method="post" th:object="${users}">
+                    <div class="form-group">
+                        <label class="control-label required-label" for="firstName"> First Name </label>
+                        <input id="firstName" class="form-control" name="firstName"
+                            required autofocus="autofocus" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label required-label" for="lastName"> Last Name </label> <input
+                            id="lastName" class="form-control" name="lastName"
+                            required autofocus="autofocus" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label required-label" for="email"> Email </label> <input
+                            id="email" class="form-control" required name="email"
+                            autofocus="autofocus" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label required-label" for="password"> Password </label>
+                          <div class="input-group">
+                             <input id="password" class="form-control" type="password" name="password" required autofocus="autofocus" />
+                                 <div class="input-group-addon">
+                                     <span toggle="#password" class="input-group-text field-icon toggle-password" onclick="togglePasswordVisibility('password')">&#x1f441;</span>
+                                  </div>
+                          </div>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label class="control-label" for="conformpassword"> Confirm Password </label>
+                         <div class="input-group">
+                           <input id="conformpassword" class="form-control" type="password" name="conformpassword" required autofocus="autofocus" oninput="return validateForm()"/>
+                             <div class="input-group-addon">
+                                <span toggle="#conformpassword" class="input-group-text field-icon toggle-password" onclick="togglePasswordVisibility('conformpassword')">&#x1f441;</span>
+                             </div>
+                          </div>
+                             <span id="message">Passwords must match</span>
+                      </div>
+                    
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success" id="submitButton">Register</button>
+                        <span>Already registered? <a href="/" th:href="@{/login}">Login
+                                here</a></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<script>
+    function togglePasswordVisibility(passwordFieldId) {
+        var passwordField = document.getElementById(passwordFieldId);
+        var fieldType = passwordField.getAttribute('type');
+        if (fieldType === 'password') 
+        {
+            passwordField.setAttribute('type', 'text');
+        } 
+        else 
+        {
+            passwordField.setAttribute('type', 'password');
+        }
+    }
+
+    function validateForm() 
+    {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("conformpassword").value;
+        var message = document.getElementById("message");
+        var submitButton = document.getElementById("submitButton");
+        
+        if (password !== confirmPassword) 
+        {
+            message.innerHTML = "Passwords do not match!";
+            message.style.color = "red"; // Change text color to red
+            submitButton.disabled = true; // Disable the submit button
+        }
+        else
+        {
+            message.innerHTML = "Passwords match successfully...!";
+            message.style.color = "green"; // Change text color to green
+            submitButton.disabled = false; // Enable the submit button
+        }
+    }
+
+</script>
+
+<!-- Bootstrap JS (jQuery is required) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

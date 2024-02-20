@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Student Management System</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+    crossorigin="anonymous"></link>
+  <!-- Add fontaswom icons link -->  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" 
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+    <!-- Latest compiled JavaScript -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-MK5oLcrqf9R+uC+StJ/ie2oZuG/6zB/X6HYu8M/Ia0PKMIyL8ZfFWpi1Ka4a6ZdF" crossorigin="anonymous"></script>
+    
+    
+ <style>
+  .navbar
+  {
+    padding: 20px 0;
+    margin-top: 0;
+    border: 2px solid white;
+    border-left: 0;
+    border-left: 0;
+    border-top: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add this line for box shadow */
+  }
+  .header
+  {
+  	padding: 20px;
+  }
+ </style>  
+</head>
+<body>
+
+<!-- ********************************Create Navigation bar************************************* -->
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#"><i class="fa-solid fa-user-group" style="color:blue">&nbsp</i>Student Management System</a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+ <!-- Navbar links -->
+<div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/students}">
+                <i class="fa-regular fa-circle-user" style="color:blue"></i> Student Management
+            </a>
+        </li>
+    </ul>
+     <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#" th:href="@{/home}">
+                <i class="fas fa-sign-out-alt" style="color: #FFD43B;"></i> Home
+            </a>
+        </li>
+    </ul>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#" th:href="@{/logout}">
+                <i class="fas fa-sign-out-alt" style="color: #FFD43B;"></i> Logout
+            </a>
+        </li>
+    </ul>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#" th:href="@{about-us}">
+                <i class="fas fa-address-card fa-flip-horizontal" style="color: #ff773d;"></i> About Us
+            </a>
+        </li>
+    </ul>
+</div>
+ 
+</nav>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>About Us</h2>
+      <p>Welcome to our Student Management System! We are dedicated to providing the best management solutions for students, teachers, and administrators. Our system is designed to streamline processes, enhance communication, and improve overall efficiency in educational institutions.</p>
+      <p>With our user-friendly interface and powerful features, managing student data, tracking progress, and generating reports has never been easier. Whether you're a small school or a large university, our system can adapt to your needs and scale with your institution.</p>
+    </div>
+    <div class="col-md-6">
+      <!-- Thymeleaf expression to render the image dynamically -->
+      <img th:src="@{images/student.jpg}" alt="About Us Image" class="img-fluid">
+    </div>
+  </div>
+</div>
+
+
+<footer class="footer mt-auto py-3 bg-light">
+  <div class="container text-center">
+    <span class="text-muted">© 2024 Student Management System</span>
+  </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

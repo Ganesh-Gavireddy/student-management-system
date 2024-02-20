@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Student Management System</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+    crossorigin="anonymous"></link>
+  <!-- Add fontaswom icons link -->  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" 
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+    <!-- Latest compiled JavaScript -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-MK5oLcrqf9R+uC+StJ/ie2oZuG/6zB/X6HYu8M/Ia0PKMIyL8ZfFWpi1Ka4a6ZdF" crossorigin="anonymous"></script>
+    
+    
+ <style>
+  .navbar
+  {
+    padding: 20px 0;
+    margin-top: 0;
+    border: 2px solid white;
+    border-left: 0;
+    border-left: 0;
+    border-top: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add this line for box shadow */
+  }
+  .header
+  {
+  	padding: 20px;
+  }
+ </style>
+</head>
+<body>
+
+<!-- ********************************Create Navigation bar************************************* -->
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#"><i class="fa-solid fa-user-group" style="color:blue">&nbsp</i>Student Management System</a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+ <!-- Navbar links -->
+<div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/students}">
+                <i class="fa-regular fa-circle-user" style="color:blue"></i> Student Management
+            </a>
+        </li>
+    </ul>
+     <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#" th:href="@{/home}">
+                <i class="fas fa-sign-out-alt" style="color: #FFD43B;"></i> Home
+            </a>
+        </li>
+    </ul>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#" th:href="@{/logout}">
+                <i class="fas fa-sign-out-alt" style="color: #FFD43B;"></i> Logout
+            </a>
+        </li>
+    </ul>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#" th:href="@{/about-us}">
+                <i class="fas fa-address-card fa-flip-horizontal" style="color: #ff773d;"></i> About Us
+            </a>
+        </li>
+    </ul>
+</div>
+ 
+</nav>
+
+<!-- **********************************Create Body****************************************** -->
+	<div class="container">
+		<div class="row">
+		<h1 class="header">Students List</h1>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<a th:href = "@{/students/new}" class="btn btn-primary btn-sm mb-3">Add Student</a>
+			</div>
+		</div>
+		<table class="table table-striped table-borderd">
+			<thead class = "table-dark">
+				<tr>
+					<th>Student First Name</th>
+					<th>Student Last Name</th>
+					<th>Student Email</th>
+					<th>Actions</th>	
+				</tr>
+			</thead>
+			
+			<tbody>
+			<!-- {students}= StudentService.getAllStudents is presented in students keyword -->
+				<tr th:each = "student:${students}">
+					<td th:text = "${student.firstName}"></td>
+					<td th:text = "${student.lastName}"></td>
+					<td th:text = "${student.email}"></td>
+					<td>
+						<a th:href="@{/students/edit/{id}(id=${student.id})}"
+							class = "btn btn-primary"> UPADTE
+						</a> &nbsp &nbsp &nbsp
+					<!-- <a th:href="@{/students/{id}(id=${student.id})}"
+							class = "btn btn-danger"> DELETE
+						</a>    -->
+						         <!-- Button trigger modal -->
+<button type="button" class="btn btn-danger
+
+" data-toggle="modal" th:attr="data-target='#exampleModalCenter'">
+  Delete
+</button>
+
+<!-- Modal -->
+<div class="modal fade" th:id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"> Bootstrap Modal</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Thymeleaf dynamic content -->
+        <p>Are you Sure you want to delete it..?</p>
+      </div>
+      <div class="modal-footer">
+      <a th:href="@{/students/delete/{id}(id=${student.id})}" class = "btn btn-danger"> Yes</a>				
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+					</td>	
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	
+<!-- Bootstrap JS (jQuery is required) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+	
+</body>
+</html>
